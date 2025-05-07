@@ -6,7 +6,6 @@ import taskRouter from './routes/taskRoute.js'
 const app = express();
 const PORT = 3000;
 
-// ✅ CORS config must be BEFORE routes
 const corsOptions = {
   origin: 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
@@ -14,13 +13,10 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// ✅ JSON middleware
 app.use(express.json());
 
-// ✅ Connect to DB
 connectDB();
 
-// ✅ Routes
 app.use('/', userRouter);
 app.use('/',taskRouter)
 app.get('/', (req, res) => {

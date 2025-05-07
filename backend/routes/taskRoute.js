@@ -12,13 +12,13 @@ router.post('/create', async (req, res) => {
   res.status(201).json(newTask);
 });
 
-// Get all tasks for user
+ Get all tasks for user
 router.get('/', async (req, res) => {
   const tasks = await taskModel.find({ userId: req.userId });
   res.json(tasks);
 });
 
-// Edit task
+ Edit task
 router.put('/:id', authMiddleware,async (req, res) => {
   const { contentTitle, description, status } = req.body;
   const task = await taskModel.findByIdAndUpdate(req.params.id, { contentTitle, description, status }, { new: true });
@@ -33,7 +33,7 @@ router.delete('/:id', async (req, res) => {
 
 router.get('/seetask', authMiddleware, async (req, res) => {
   try {
-    const userId = req.user.id; // The user ID is added to req.user by authMiddleware
+    const userId = req.user.id; 
     const tasks = await taskModel.find({ userId })
     res.status(200).json(tasks);
   } catch (error) {
